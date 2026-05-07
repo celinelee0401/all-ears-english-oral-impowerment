@@ -245,7 +245,7 @@
 </div><!-- #app -->
 
 <script>
-let userRole='',aiRole='',transcript='',targetPhrases=[],hintCards=[],conversationHistory=[],currentSessionId=null,recognition=null,isRecording=false,isAiSpeaking=false,pendingText='',previewData=null,currentMode='youtube';
+let userRole='',aiRole='',transcript='',targetPhrases=[],hintCards=[],conversationHistory=[],currentSessionId=null,recognition=null,isRecording=false,isAiSpeaking=false,userStoppedMic=false,pendingText='',previewData=null,currentMode='youtube';
 
 function navTo(name){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
@@ -361,14 +361,48 @@ function setStatus(msg,type){const el=document.getElementById('setup-status');el
 function setupSpeechRecognition(){
   const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
   if(!SR){document.getElementById('mic-status').textContent='⚠️ 請用 Chrome 使用語音輸入';document.getElementById('mic-btn').disabled=true;return;}
-  recognition=new SR();recognition.lang='en-US';recognition.continuous=true;recognition.interimResults=true;recognition.maxAlternatives=1;
+  recognition=new SR();recognition.lang='en-US';recognition.continuous=false;recognition.interimResults=true;
   recognition.onstart=()=>{isRecording=true;document.getElementById('mic-btn').classList.add('recording');document.getElementById('mic-btn').textContent='⏹';document.getElementById('mic-status').textContent='🔴 聆聽中...';document.getElementById('mic-status').className='mic-status listening';};
-  recognition.onresult=(e)=>{let f='',i='';for(const r of e.results){if(r.isFinal)f+=r[0].transcript;else i+=r[0].transcript;}const c=(pendingText+' '+f).trim()||i;document.getElementById('transcript-preview').textContent=c||'說話中...';if(f)pendingText=(pendingText+' '+f).trim();document.getElementById('send-btn').disabled=!pendingText;};
-  recognition.onend=()=>{isRecording=false;document.getElementById('mic-btn').classList.remove('recording');document.getElementById('mic-btn').textContent='🎤';document.getElementById('mic-status').textContent=pendingText?'✅ 確認後按「傳送」':'按下麥克風開始說話';document.getElementById('mic-status').className='mic-status';};
+  recognition.onresult=(e)=>{
+  let interim='';
+  // 只取這次事件新增的 final 結果
+  for(let i=e.resultIndex;i<e.results.length;i++){
+    if(e.results[i].isFinal){pendingText=(pendingText+' '+e.results[i][0].transcript).trim();}
+    else{interim+=e.results[i][0].transcript;}
+  }
+  document.getElementById('transcript-preview').textContent=pendingText+(interim?' '+interim:'')||'說話中...';
+  document.getElementById('send-btn').disabled=!pendingText;
+};
+  recognition.onend=()=>{
+  isRecording=false;
+  document.getElementById('mic-btn').classList.remove('recording');
+  document.getElementById('mic-btn').textContent='🎤';
+  // 如果不是 AI 說話中、也不是使用者主動停止，自動重啟繼續聆聽
+  if(!isAiSpeaking && !userStoppedMic){
+    try{recognition.start();}catch(e){}
+  } else {
+    document.getElementById('mic-status').textContent=pendingText?'✅ 確認後按「傳送」':'按下麥克風開始說話';
+    document.getElementById('mic-status').className='mic-status';
+  }
+};
   recognition.onerror=(e)=>{isRecording=false;document.getElementById('mic-btn').classList.remove('recording');document.getElementById('mic-btn').textContent='🎤';document.getElementById('mic-status').textContent='❌ '+e.error;};
 }
 
-function toggleMic(){if(!recognition)return;if(isRecording){recognition.stop();}else{pendingText='';document.getElementById('transcript-preview').textContent='說話中...';recognition.start();}}
+function toggleMic(){
+  if(!recognition)return;
+  if(isRecording){
+    userStoppedMic=true;
+    recognition.stop();
+    document.getElementById('mic-status').textContent=pendingText?'✅ 確認後按「傳送」':'按下麥克風開始說話';
+    document.getElementById('mic-status').className='mic-status';
+  } else {
+    userStoppedMic=false;
+    pendingText='';
+    document.getElementById('transcript-preview').textContent='說話中...';
+    document.getElementById('send-btn').disabled=true;
+    recognition.start();
+  }
+}
 function clearTranscript(){pendingText='';document.getElementById('transcript-preview').textContent='你說的話會出現在這裡...';document.getElementById('send-btn').disabled=true;}
 
 async function sendMessage(){
@@ -398,7 +432,7 @@ function speak(text){return new Promise(resolve=>{if(!window.speechSynthesis)ret
   document.getElementById('mic-btn').disabled=true;
   document.getElementById('mic-btn').textContent='🎤';
   document.getElementById('mic-btn').classList.remove('recording');
-  window.speechSynthesis.cancel();isAiSpeaking=true;document.getElementById('mic-status').textContent='🔊 '+aiRole+' 說話中...';const utt=new SpeechSynthesisUtterance(text);utt.lang='en-US';utt.rate=0.92;utt.pitch=1.05;const v=window.speechSynthesis.getVoices();const f=v.find(x=>x.lang.startsWith('en')&&/female|samantha|karen|victoria|moira/i.test(x.name));if(f)utt.voice=f;utt.onend=utt.onerror=()=>{isAiSpeaking=false;document.getElementById('mic-btn').disabled=false;document.getElementById('mic-status').textContent='按下麥克風開始說話';resolve();};window.speechSynthesis.speak(utt);});}
+  window.speechSynthesis.cancel();isAiSpeaking=true;document.getElementById('mic-status').textContent='🔊 '+aiRole+' 說話中...';const utt=new SpeechSynthesisUtterance(text);utt.lang='en-US';utt.rate=0.92;utt.pitch=1.05;const v=window.speechSynthesis.getVoices();const f=v.find(x=>x.lang.startsWith('en')&&/female|samantha|karen|victoria|moira/i.test(x.name));if(f)utt.voice=f;utt.onend=utt.onerror=()=>{isAiSpeaking=false;userStoppedMic=false;document.getElementById('mic-btn').disabled=false;document.getElementById('mic-status').textContent='按下麥克風開始說話';resolve();};window.speechSynthesis.speak(utt);});}
 
 function saveSession(){const sessions=JSON.parse(localStorage.getItem('aee_sessions')||'[]');const ex=sessions.find(s=>s.id===currentSessionId);if(ex){ex.turns++;ex.lastActive=Date.now();}else{sessions.unshift({id:currentSessionId,date:new Date().toLocaleDateString('zh-TW'),role:userRole,phrases:targetPhrases.slice(0,5),turns:1,lastActive:Date.now(),summary:(previewData?.summary||'').slice(0,80)});}localStorage.setItem('aee_sessions',JSON.stringify(sessions.slice(0,50)));}
 
