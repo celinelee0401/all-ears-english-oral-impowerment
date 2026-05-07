@@ -361,7 +361,7 @@ function setStatus(msg,type){const el=document.getElementById('setup-status');el
 function setupSpeechRecognition(){
   const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
   if(!SR){document.getElementById('mic-status').textContent='⚠️ 請用 Chrome 使用語音輸入';document.getElementById('mic-btn').disabled=true;return;}
-  recognition=new SR();recognition.lang='en-US';recognition.continuous=false;recognition.interimResults=true;
+  recognition=new SR();recognition.lang='en-US';recognition.continuous=true;recognition.interimResults=true;recognition.maxAlternatives=1;
   recognition.onstart=()=>{isRecording=true;document.getElementById('mic-btn').classList.add('recording');document.getElementById('mic-btn').textContent='⏹';document.getElementById('mic-status').textContent='🔴 聆聽中...';document.getElementById('mic-status').className='mic-status listening';};
   recognition.onresult=(e)=>{let f='',i='';for(const r of e.results){if(r.isFinal)f+=r[0].transcript;else i+=r[0].transcript;}const c=(pendingText+' '+f).trim()||i;document.getElementById('transcript-preview').textContent=c||'說話中...';if(f)pendingText=(pendingText+' '+f).trim();document.getElementById('send-btn').disabled=!pendingText;};
   recognition.onend=()=>{isRecording=false;document.getElementById('mic-btn').classList.remove('recording');document.getElementById('mic-btn').textContent='🎤';document.getElementById('mic-status').textContent=pendingText?'✅ 確認後按「傳送」':'按下麥克風開始說話';document.getElementById('mic-status').className='mic-status';};
