@@ -19,8 +19,9 @@
     .nav-btn{background:transparent;border:1px solid var(--border);color:var(--text-dim);border-radius:8px;padding:6px 12px;font-size:.8rem;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif}
     .nav-btn:hover,.nav-btn.active{border-color:var(--accent);color:var(--accent)}
     .screen{display:none;flex-direction:column;flex:1;overflow:hidden}
-    #preview-screen.active{overflow-y:auto;display:block}
+    
     .screen.active{display:flex}
+    #preview-screen{overflow-y:auto!important;display:block!important;height:100%}
     .step-bar{display:flex;align-items:center;padding:12px 20px;background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0}
     .step{display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--text-dim)}
     .step.active{color:var(--accent)}.step.done{color:var(--success)}
@@ -50,7 +51,7 @@
     .status-msg.error{color:var(--error)}.status-msg.success{color:var(--success)}
     .hint-text{font-size:.78rem;color:var(--text-dim);line-height:1.5;background:var(--surface2);border-radius:var(--radius-sm);padding:10px 12px}
     .hint-text a{color:var(--aubrey)}
-    #preview-screen{overflow-y:auto}
+    
     .preview-content{padding:20px 16px;display:flex;flex-direction:column;gap:16px}
     .preview-summary{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px}
     .preview-summary h3{font-size:.75rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
@@ -328,7 +329,12 @@ function startPractice(){
 
 function toggleHints(){document.getElementById('hint-drawer').classList.toggle('open');}
 function useHint(text){pendingText=(pendingText+' '+text).trim();document.getElementById('transcript-preview').textContent=pendingText;document.getElementById('send-btn').disabled=false;document.getElementById('hint-drawer').classList.remove('open');}
-function showScreen(name){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(name+'-screen').classList.add('active');}
+function showScreen(name){
+  document.querySelectorAll('.screen').forEach(s=>{s.classList.remove('active');s.style.display='';});
+  const el=document.getElementById(name+'-screen');
+  el.classList.add('active');
+  if(name==='preview'){el.style.display='block';el.scrollTop=0;}
+}
 function showLoading(msg){document.getElementById('loading-text').textContent=msg;document.getElementById('loading-overlay').classList.remove('hidden');}
 function updateLoading(msg){document.getElementById('loading-text').textContent=msg;}
 function hideLoading(){document.getElementById('loading-overlay').classList.add('hidden');}
