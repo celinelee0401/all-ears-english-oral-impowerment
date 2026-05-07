@@ -20,31 +20,40 @@
     .nav-btn:hover,.nav-btn.active{border-color:var(--accent);color:var(--accent)}
     .screen{display:none;flex-direction:column;flex:1;overflow:hidden}
     .screen.active{display:flex}
-    .step-bar{display:flex;align-items:center;padding:12px 20px;background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0;gap:0}
+    .step-bar{display:flex;align-items:center;padding:12px 20px;background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0}
     .step{display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--text-dim)}
     .step.active{color:var(--accent)}.step.done{color:var(--success)}
     .step-num{width:22px;height:22px;border-radius:50%;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:500}
     .step-line{flex:1;height:1px;background:var(--border);margin:0 8px}
-    #setup-screen{justify-content:center;align-items:center;padding:24px 20px;gap:20px;overflow-y:auto}
-    .setup-card{width:100%;max-width:480px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px 24px;display:flex;flex-direction:column;gap:20px}
-    .setup-card h2{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--accent)}
+    #setup-screen{justify-content:center;align-items:center;padding:20px 16px;gap:16px;overflow-y:auto}
+    .setup-card{width:100%;max-width:480px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px 20px;display:flex;flex-direction:column;gap:18px}
+    .setup-card h2{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--accent)}
     .field label{display:block;font-size:.78rem;color:var(--text-dim);margin-bottom:8px;letter-spacing:.05em;text-transform:uppercase}
-    .field input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 16px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.95rem;outline:none;transition:border-color .2s}
-    .field input:focus{border-color:var(--accent)}.field input::placeholder{color:var(--text-dim)}
+    .field input,.field textarea{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 16px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.9rem;outline:none;transition:border-color .2s;resize:vertical}
+    .field input:focus,.field textarea:focus{border-color:var(--accent)}
+    .field input::placeholder,.field textarea::placeholder{color:var(--text-dim)}
+    .field textarea{min-height:100px;max-height:180px}
+    /* Mode tabs */
+    .mode-tabs{display:flex;gap:8px}
+    .mode-tab{flex:1;background:var(--surface2);border:2px solid var(--border);border-radius:var(--radius-sm);padding:10px 8px;cursor:pointer;text-align:center;transition:all .2s;color:var(--text-dim);font-size:.85rem;font-family:'DM Sans',sans-serif}
+    .mode-tab.active{border-color:var(--accent);color:var(--accent);background:rgba(232,197,71,.08)}
+    .mode-panel{display:none}.mode-panel.active{display:flex;flex-direction:column;gap:10px}
     .role-select{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    .role-btn{background:var(--surface2);border:2px solid var(--border);border-radius:var(--radius-sm);padding:14px 12px;cursor:pointer;text-align:center;transition:all .2s;color:var(--text-dim)}
-    .role-btn .name{font-size:1rem;font-weight:500;display:block}.role-btn .desc{font-size:.75rem;margin-top:4px}
+    .role-btn{background:var(--surface2);border:2px solid var(--border);border-radius:var(--radius-sm);padding:12px;cursor:pointer;text-align:center;transition:all .2s;color:var(--text-dim)}
+    .role-btn .name{font-size:1rem;font-weight:500;display:block}.role-btn .desc{font-size:.75rem;margin-top:2px}
     .role-btn.selected-lindsay{border-color:var(--lindsay);color:var(--lindsay);background:rgba(232,197,71,.08)}
     .role-btn.selected-aubrey{border-color:var(--aubrey);color:var(--aubrey);background:rgba(126,184,247,.08)}
-    .start-btn{background:var(--accent);color:#0d0d0f;border:none;border-radius:var(--radius-sm);padding:15px;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:500;cursor:pointer;transition:all .2s;width:100%}
-    .start-btn:hover{background:var(--accent2);transform:translateY(-1px)}.start-btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
-    .status-msg{font-size:.85rem;color:var(--text-dim);text-align:center;min-height:20px}
+    .start-btn{background:var(--accent);color:#0d0d0f;border:none;border-radius:var(--radius-sm);padding:14px;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:500;cursor:pointer;transition:all .2s;width:100%}
+    .start-btn:hover{background:var(--accent2)}.start-btn:disabled{opacity:.4;cursor:not-allowed}
+    .status-msg{font-size:.83rem;color:var(--text-dim);text-align:center;min-height:18px}
     .status-msg.error{color:var(--error)}.status-msg.success{color:var(--success)}
+    .hint-text{font-size:.78rem;color:var(--text-dim);line-height:1.5;background:var(--surface2);border-radius:var(--radius-sm);padding:10px 12px}
+    .hint-text a{color:var(--aubrey)}
     #preview-screen{overflow-y:auto}
     .preview-content{padding:20px 16px;display:flex;flex-direction:column;gap:16px}
     .preview-summary{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px}
     .preview-summary h3{font-size:.75rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
-    .preview-summary p{font-size:.95rem;line-height:1.6}
+    .preview-summary p{font-size:.93rem;line-height:1.6}
     .vocab-grid{display:flex;flex-direction:column;gap:10px}
     .vocab-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;display:flex;flex-direction:column;gap:6px}
     .vocab-phrase{font-size:1rem;font-weight:500;color:var(--accent)}
@@ -56,15 +65,14 @@
     .warmup-item:hover{background:rgba(126,184,247,.08);border-color:var(--aubrey)}
     .warmup-item::before{content:"💬";flex-shrink:0}
     .preview-actions{display:flex;gap:10px;padding:0 0 8px}
-    .preview-start{flex:1;background:var(--accent);color:#0d0d0f;border:none;border-radius:var(--radius-sm);padding:14px;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:500;cursor:pointer;transition:all .2s}
+    .preview-start{flex:1;background:var(--accent);color:#0d0d0f;border:none;border-radius:var(--radius-sm);padding:14px;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:500;cursor:pointer}
     .preview-start:hover{background:var(--accent2)}
-    .preview-back{background:var(--surface2);color:var(--text-dim);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 18px;font-family:'DM Sans',sans-serif;font-size:.9rem;cursor:pointer;transition:all .2s}
+    .preview-back{background:var(--surface2);color:var(--text-dim);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 18px;font-family:'DM Sans',sans-serif;font-size:.9rem;cursor:pointer}
     .preview-back:hover{border-color:var(--text-dim);color:var(--text)}
     #practice-screen{flex-direction:column}
     .practice-header{padding:10px 16px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;flex-shrink:0}
     .episode-title{font-size:.82rem;color:var(--text-dim);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .hint-toggle{background:rgba(232,197,71,.1);border:1px solid rgba(232,197,71,.25);color:var(--accent);border-radius:20px;padding:4px 12px;font-size:.75rem;cursor:pointer;white-space:nowrap;font-family:'DM Sans',sans-serif;transition:all .2s}
-    .hint-toggle:hover{background:rgba(232,197,71,.2)}
+    .hint-toggle{background:rgba(232,197,71,.1);border:1px solid rgba(232,197,71,.25);color:var(--accent);border-radius:20px;padding:4px 12px;font-size:.75rem;cursor:pointer;white-space:nowrap;font-family:'DM Sans',sans-serif}
     .hint-drawer{background:var(--surface2);border-bottom:1px solid var(--border);max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s;flex-shrink:0}
     .hint-drawer.open{max-height:200px;padding:12px 16px;overflow-y:auto}
     .hint-drawer-title{font-size:.72rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
@@ -97,7 +105,7 @@
     .send-row{display:flex;gap:8px}
     .send-btn{flex:1;background:var(--accent);color:#0d0d0f;border:none;border-radius:var(--radius-sm);padding:12px;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:500;cursor:pointer;transition:all .2s}
     .send-btn:disabled{opacity:.3;cursor:not-allowed}.send-btn:not(:disabled):hover{background:var(--accent2)}
-    .clear-btn{background:var(--surface2);color:var(--text-dim);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;font-size:.9rem;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif}
+    .clear-btn{background:var(--surface2);color:var(--text-dim);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;font-size:.9rem;cursor:pointer;font-family:'DM Sans',sans-serif}
     .clear-btn:hover{border-color:var(--error);color:var(--error)}
     #history-screen{overflow-y:auto;padding:20px 16px;gap:12px}
     .history-title{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--accent);flex-shrink:0}
@@ -130,13 +138,37 @@
   </nav>
 </header>
 
+<!-- Setup -->
 <div id="setup-screen" class="screen active">
   <div class="setup-card">
     <h2>開始新練習</h2>
-    <div class="field">
-      <label>YouTube 網址</label>
-      <input type="url" id="yt-url" placeholder="https://www.youtube.com/watch?v=..." />
+
+    <!-- Mode tabs -->
+    <div>
+      <div class="field"><label>輸入方式</label></div>
+      <div class="mode-tabs">
+        <button class="mode-tab active" onclick="switchMode('youtube')">🔗 YouTube 網址</button>
+        <button class="mode-tab" onclick="switchMode('paste')">📋 貼上逐字稿</button>
+      </div>
     </div>
+
+    <!-- YouTube mode -->
+    <div class="mode-panel active" id="panel-youtube">
+      <div class="field">
+        <input type="url" id="yt-url" placeholder="https://www.youtube.com/watch?v=..." />
+      </div>
+      <div class="hint-text">
+        ⚠️ 部分 AEE 影片字幕已關閉。若失敗，請改用「貼上逐字稿」模式，從 <a href="https://metacast.app/podcast/all-ears-english-podcast/Vhu2wNH2" target="_blank">Metacast</a> 複製逐字稿貼入。
+      </div>
+    </div>
+
+    <!-- Paste mode -->
+    <div class="mode-panel" id="panel-paste">
+      <div class="field">
+        <textarea id="paste-text" placeholder="從 Metacast 複製逐字稿貼在這裡...&#10;&#10;網址：metacast.app → All Ears English → 選集數 → 複製全文"></textarea>
+      </div>
+    </div>
+
     <div class="field">
       <label>你要扮演的角色</label>
       <div class="role-select">
@@ -144,11 +176,13 @@
         <div class="role-btn" id="role-aubrey" onclick="selectRole('Aubrey')"><span class="name">Aubrey</span><span class="desc">紐約・回應</span></div>
       </div>
     </div>
-    <div class="status-msg" id="setup-status">貼上 YouTube 連結後點「載入並預習」</div>
+
+    <div class="status-msg" id="setup-status">選擇輸入方式，選好角色後開始</div>
     <button class="start-btn" id="start-btn" onclick="loadEpisode()">📥 載入並預習</button>
   </div>
 </div>
 
+<!-- Preview -->
 <div id="preview-screen" class="screen">
   <div class="step-bar">
     <div class="step done"><div class="step-num">✓</div><span>載入</span></div>
@@ -160,6 +194,7 @@
   <div class="preview-content" id="preview-content"></div>
 </div>
 
+<!-- Practice -->
 <div id="practice-screen" class="screen">
   <div class="step-bar">
     <div class="step done"><div class="step-num">✓</div><span>載入</span></div>
@@ -190,44 +225,75 @@
   </div>
 </div>
 
+<!-- History -->
 <div id="history-screen" class="screen">
   <div class="history-title">練習紀錄</div>
   <div id="history-list"></div>
 </div>
 
 <script>
-let userRole='',aiRole='',transcript='',targetPhrases=[],hintCards=[],conversationHistory=[],currentSessionId=null,recognition=null,isRecording=false,isAiSpeaking=false,pendingText='',previewData=null;
+let userRole='',aiRole='',transcript='',targetPhrases=[],hintCards=[],conversationHistory=[],currentSessionId=null,recognition=null,isRecording=false,isAiSpeaking=false,pendingText='',previewData=null,currentMode='youtube';
 
 function navTo(name){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(name+'-screen').classList.add('active');document.getElementById('nav-practice').classList.toggle('active',name!=='history');document.getElementById('nav-history').classList.toggle('active',name==='history');if(name==='history')renderHistory();}
+
+function switchMode(mode){
+  currentMode=mode;
+  document.querySelectorAll('.mode-tab').forEach((t,i)=>t.classList.toggle('active',(i===0&&mode==='youtube')||(i===1&&mode==='paste')));
+  document.getElementById('panel-youtube').classList.toggle('active',mode==='youtube');
+  document.getElementById('panel-paste').classList.toggle('active',mode==='paste');
+}
 
 function selectRole(role){userRole=role;aiRole=role==='Lindsay'?'Aubrey':'Lindsay';document.getElementById('role-lindsay').className='role-btn'+(role==='Lindsay'?' selected-lindsay':'');document.getElementById('role-aubrey').className='role-btn'+(role==='Aubrey'?' selected-aubrey':'');}
 
 function extractVideoId(url){const ps=[/[?&]v=([^&#]+)/,/youtu\.be\/([^?&#]+)/,/youtube\.com\/embed\/([^?&#]+)/];for(const p of ps){const m=url.match(p);if(m)return m[1];}return null;}
 
 async function loadEpisode(){
-  const url=document.getElementById('yt-url').value.trim();
-  if(!url)return setStatus('請貼上 YouTube 網址','error');
   if(!userRole)return setStatus('請選擇你要扮演的角色','error');
-  const videoId=extractVideoId(url);
-  if(!videoId)return setStatus('無效的 YouTube 網址','error');
-  showLoading('⏳ 正在抓取字幕...');
   document.getElementById('start-btn').disabled=true;
+
+  if(currentMode==='paste'){
+    const text=document.getElementById('paste-text').value.trim();
+    if(!text||text.length<200)return setStatus('逐字稿太短，請貼上完整內容','error');
+    transcript=text;
+    showLoading('🧠 AI 分析本集重點...');
+    await analyzeAndShow();
+  } else {
+    const url=document.getElementById('yt-url').value.trim();
+    if(!url)return setStatus('請貼上 YouTube 網址','error');
+    const videoId=extractVideoId(url);
+    if(!videoId)return setStatus('無效的 YouTube 網址','error');
+    showLoading('⏳ 正在抓取字幕...');
+    try{
+      const r=await fetch('/api/transcript',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({videoId})});
+      const d=await r.json();
+      if(!r.ok||d.error)throw new Error(d.error||'無法取得字幕');
+      transcript=d.fullText;
+      updateLoading('🧠 AI 分析本集重點...');
+      await analyzeAndShow();
+    }catch(err){
+      hideLoading();
+      setStatus('❌ '+err.message+'（建議改用「貼上逐字稿」模式）','error');
+      document.getElementById('start-btn').disabled=false;
+    }
+  }
+}
+
+async function analyzeAndShow(){
   try{
-    const r1=await fetch('/api/transcript',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({videoId})});
-    const d1=await r1.json();
-    if(!r1.ok||d1.error)throw new Error(d1.error||'無法取得字幕');
-    transcript=d1.fullText;
-    updateLoading('🧠 AI 分析本集重點...');
-    const r2=await fetch('/api/preview',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({transcript})});
-    const d2=await r2.json();
-    if(!r2.ok||d2.error)throw new Error(d2.error||'分析失敗');
-    previewData=d2;
-    targetPhrases=(d2.vocabulary||[]).map(v=>v.phrase);
-    hintCards=d2.hint_cards||[];
+    const r=await fetch('/api/preview',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({transcript})});
+    const d=await r.json();
+    if(!r.ok||d.error)throw new Error(d.error||'分析失敗');
+    previewData=d;
+    targetPhrases=(d.vocabulary||[]).map(v=>v.phrase);
+    hintCards=d.hint_cards||[];
     hideLoading();
-    renderPreview(d2);
+    renderPreview(d);
     showScreen('preview');
-  }catch(err){hideLoading();setStatus('❌ '+err.message,'error');document.getElementById('start-btn').disabled=false;}
+  }catch(err){
+    hideLoading();
+    setStatus('❌ AI 分析失敗：'+err.message,'error');
+    document.getElementById('start-btn').disabled=false;
+  }
 }
 
 function renderPreview(data){
@@ -265,7 +331,7 @@ function showScreen(name){document.querySelectorAll('.screen').forEach(s=>s.clas
 function showLoading(msg){document.getElementById('loading-text').textContent=msg;document.getElementById('loading-overlay').classList.remove('hidden');}
 function updateLoading(msg){document.getElementById('loading-text').textContent=msg;}
 function hideLoading(){document.getElementById('loading-overlay').classList.add('hidden');}
-function setStatus(msg,type){const el=document.getElementById('setup-status');el.textContent=msg;el.className='status-msg'+(type?' '+type:'');}
+function setStatus(msg,type){const el=document.getElementById('setup-status');el.textContent=msg;el.className='status-msg'+(type?' '+type:'');document.getElementById('start-btn').disabled=false;}
 
 function setupSpeechRecognition(){
   const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
@@ -289,7 +355,7 @@ async function sendMessage(){
     const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({userMessage:text,transcript,history:conversationHistory.slice(-10),targetPhrases})});
     const data=await res.json();if(!res.ok||data.error)throw new Error(data.error);
     indicator.remove();addBubble('ai',data.dialoguePart);if(data.feedbackPart)addFeedback(data.feedbackPart);
-    conversationHistory.push({role:'assistant',content:data.reply});saveSession(text,data.dialoguePart);
+    conversationHistory.push({role:'assistant',content:data.reply});saveSession();
     await speak(data.dialoguePart);
   }catch(err){indicator.remove();addBubble('ai','⚠️ 連線錯誤，請重試。（'+err.message+'）');}
   document.getElementById('mic-btn').disabled=false;document.getElementById('send-btn').disabled=false;
@@ -303,7 +369,7 @@ function escAttr(s){return String(s).replace(/"/g,'&quot;').replace(/'/g,'&#39;'
 
 function speak(text){return new Promise(resolve=>{if(!window.speechSynthesis)return resolve();window.speechSynthesis.cancel();isAiSpeaking=true;document.getElementById('mic-status').textContent='🔊 '+aiRole+' 說話中...';const utt=new SpeechSynthesisUtterance(text);utt.lang='en-US';utt.rate=0.92;utt.pitch=1.05;const voices=window.speechSynthesis.getVoices();const female=voices.find(v=>v.lang.startsWith('en')&&/female|samantha|karen|victoria|moira/i.test(v.name));if(female)utt.voice=female;utt.onend=utt.onerror=()=>{isAiSpeaking=false;document.getElementById('mic-status').textContent='按下麥克風開始說話';resolve();};window.speechSynthesis.speak(utt);});}
 
-function saveSession(userTurn,aiTurn){const sessions=JSON.parse(localStorage.getItem('aee_sessions')||'[]');const existing=sessions.find(s=>s.id===currentSessionId);if(existing){existing.turns++;existing.lastActive=Date.now();}else{sessions.unshift({id:currentSessionId,date:new Date().toLocaleDateString('zh-TW'),role:userRole,phrases:targetPhrases.slice(0,5),turns:1,lastActive:Date.now(),summary:(previewData?.summary||'').slice(0,80)});}localStorage.setItem('aee_sessions',JSON.stringify(sessions.slice(0,50)));}
+function saveSession(){const sessions=JSON.parse(localStorage.getItem('aee_sessions')||'[]');const existing=sessions.find(s=>s.id===currentSessionId);if(existing){existing.turns++;existing.lastActive=Date.now();}else{sessions.unshift({id:currentSessionId,date:new Date().toLocaleDateString('zh-TW'),role:userRole,phrases:targetPhrases.slice(0,5),turns:1,lastActive:Date.now(),summary:(previewData?.summary||'').slice(0,80)});}localStorage.setItem('aee_sessions',JSON.stringify(sessions.slice(0,50)));}
 
 function renderHistory(){const sessions=JSON.parse(localStorage.getItem('aee_sessions')||'[]');const list=document.getElementById('history-list');if(!sessions.length){list.innerHTML='<div class="empty-state">還沒有練習紀錄<br>完成第一次練習後會出現在這裡 🎯</div>';return;}list.innerHTML=sessions.map(s=>`<div class="session-card"><div class="s-title">第 ${s.turns} 輪對話・扮演 ${s.role}</div>${s.summary?`<div class="s-meta">${escHtml(s.summary)}</div>`:''}<div class="s-meta">${s.date}</div><div class="s-phrases">${(s.phrases||[]).map(p=>`<span class="phrase-tag">${escHtml(p)}</span>`).join('')}</div></div>`).join('');}
 
