@@ -1,7 +1,3 @@
-import Anthropic from "@anthropic-ai/sdk";
-
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-
 export const handler = async (event) => {
   const headers = {
     "Access-Control-Allow-Origin": "*",
@@ -36,20 +32,32 @@ Guidelines:
 - Be encouraging! Connection NOT Perfection is the AEE motto.`;
 
     const messages = [
+      { role: "system", content: systemPrompt },
       ...(history || []),
       { role: "user", content: userMessage },
     ];
 
-    const response = await client.messages.create({
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 1000,
-      system: systemPrompt,
-      messages,
+    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${process.env.ANTHROPIC_API_KEY}`,
+      },
+      body: JSON.stringify({
+        model: "llama-3.3-70b-versatile",
+        max_tokens: 1000,
+        messages,
+      }),
     });
 
-    const reply = response.content[0].text;
+    if (!response.ok) {
+      const err = await response.text();
+      throw new Error(err);
+    }
 
-    // 分離對話內容和回饋
+    const data = await response.json();
+    const reply = data.choices[0].message.content;
+
     const parts = reply.split("💬 Feedback:");
     const dialoguePart = parts[0].trim();
     const feedbackPart = parts[1] ? parts[1].trim() : "";
