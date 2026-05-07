@@ -1,0 +1,12 @@
+{
+  "name": "aee-practice",
+  "version": "1.0.0",
+  "description": "All Ears English 口說練習 App",
+  "scripts": {
+    "dev": "netlify dev"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.20.0",
+    "youtube-transcript": "^1.2.1"
+  }
+}
