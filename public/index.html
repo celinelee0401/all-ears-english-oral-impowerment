@@ -10,8 +10,6 @@
     :root{--bg:#0d0d0f;--surface:#16161a;--surface2:#1e1e24;--border:#2a2a35;--accent:#e8c547;--accent2:#f0a04b;--text:#f0ede8;--text-dim:#8a8799;--lindsay:#e8c547;--aubrey:#7eb8f7;--feedback-bg:#1a1f2e;--error:#f07070;--success:#70c99a;--radius:16px;--radius-sm:10px}
     *{box-sizing:border-box;margin:0;padding:0}
     html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif}
-
-    /* ── 整體佈局：header 固定，main 填滿剩餘高度 ── */
     #app{display:flex;flex-direction:column;height:100vh}
     header{flex-shrink:0;padding:14px 20px 12px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
     .logo{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--accent)}
@@ -19,22 +17,15 @@
     header nav{margin-left:auto;display:flex;gap:8px}
     .nav-btn{background:transparent;border:1px solid var(--border);color:var(--text-dim);border-radius:8px;padding:6px 12px;font-size:.8rem;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif}
     .nav-btn:hover,.nav-btn.active{border-color:var(--accent);color:var(--accent)}
-
-    /* ── 每個 screen 都是 flex column，填滿剩餘空間 ── */
     .screen{display:none;flex-direction:column;flex:1;min-height:0}
     .screen.active{display:flex}
-
-    /* ── step bar ── */
     .step-bar{flex-shrink:0;display:flex;align-items:center;padding:11px 20px;background:var(--surface);border-bottom:1px solid var(--border)}
     .step{display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--text-dim)}
     .step.active{color:var(--accent)}.step.done{color:var(--success)}
     .step-num{width:22px;height:22px;border-radius:50%;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:500}
     .step-line{flex:1;height:1px;background:var(--border);margin:0 8px}
-
-    /* ── scroll-body: 只有這一層捲動 ── */
     .scroll-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
-
-    /* ── Setup ── */
+    /* Setup */
     #setup-screen .scroll-body{display:flex;flex-direction:column;align-items:center;padding:20px 16px;gap:16px}
     .setup-card{width:100%;max-width:480px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px 20px;display:flex;flex-direction:column;gap:18px}
     .setup-card h2{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--accent)}
@@ -57,8 +48,7 @@
     .status-msg{font-size:.83rem;color:var(--text-dim);text-align:center;min-height:18px}
     .status-msg.error{color:var(--error)}.status-msg.success{color:var(--success)}
     .hint-text{font-size:.78rem;color:var(--text-dim);line-height:1.55;background:var(--surface2);border-radius:var(--radius-sm);padding:10px 12px}
-
-    /* ── Preview ── */
+    /* Preview */
     #preview-screen .scroll-body{padding:20px 16px;display:flex;flex-direction:column;gap:16px}
     .preview-summary{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px}
     .preview-summary h3{font-size:.75rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
@@ -77,17 +67,34 @@
     .preview-start{flex:1;background:var(--accent);color:#0d0d0f;border:none;border-radius:var(--radius-sm);padding:14px;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:500;cursor:pointer}
     .preview-start:hover{background:var(--accent2)}
     .preview-back{background:var(--surface2);color:var(--text-dim);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 18px;font-family:'DM Sans',sans-serif;font-size:.9rem;cursor:pointer}
-
-    /* ── Practice ── */
-    .practice-header{flex-shrink:0;padding:10px 16px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+    /* Practice */
+    .practice-header{flex-shrink:0;padding:10px 16px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
     .episode-title{font-size:.82rem;color:var(--text-dim);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .hint-toggle{background:rgba(232,197,71,.1);border:1px solid rgba(232,197,71,.25);color:var(--accent);border-radius:20px;padding:4px 12px;font-size:.75rem;cursor:pointer;white-space:nowrap;font-family:'DM Sans',sans-serif}
+    .icon-btn{background:rgba(232,197,71,.1);border:1px solid rgba(232,197,71,.25);color:var(--accent);border-radius:20px;padding:4px 11px;font-size:.75rem;cursor:pointer;white-space:nowrap;font-family:'DM Sans',sans-serif;transition:all .2s}
+    .icon-btn:hover{background:rgba(232,197,71,.2)}
+    /* Script drawer */
+    .script-drawer{flex-shrink:0;background:var(--surface2);border-bottom:1px solid var(--border);max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s}
+    .script-drawer.open{max-height:240px;padding:12px 16px;overflow-y:auto}
+    .script-drawer-title{font-size:.72rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+    .script-line{display:flex;gap:8px;margin-bottom:8px;align-items:flex-start}
+    .script-speaker{font-size:.72rem;font-weight:600;padding-top:2px;min-width:52px;flex-shrink:0}
+    .script-speaker.lindsay{color:var(--lindsay)}.script-speaker.aubrey{color:var(--aubrey)}
+    .script-text{font-size:.85rem;line-height:1.5;color:var(--text)}
+    .script-text.my-turn{color:var(--accent);font-weight:500}
+    /* Hint drawer */
     .hint-drawer{flex-shrink:0;background:var(--surface2);border-bottom:1px solid var(--border);max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s}
     .hint-drawer.open{max-height:160px;padding:12px 16px;overflow-y:auto}
     .hint-drawer-title{font-size:.72rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
     .hint-chips{display:flex;flex-wrap:wrap;gap:6px}
     .hint-chip{background:rgba(232,197,71,.08);border:1px solid rgba(232,197,71,.2);color:var(--text);border-radius:20px;padding:5px 12px;font-size:.82rem;cursor:pointer;transition:all .2s}
     .hint-chip:hover{background:rgba(232,197,71,.15);border-color:var(--accent);color:var(--accent)}
+    /* Script line prompt */
+    .script-prompt{flex-shrink:0;background:rgba(232,197,71,.06);border-top:1px solid rgba(232,197,71,.15);padding:10px 16px;display:flex;align-items:center;gap:10px}
+    .script-prompt.hidden{display:none}
+    .script-prompt-label{font-size:.72rem;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;white-space:nowrap}
+    .script-prompt-text{font-size:.9rem;color:var(--text);flex:1;line-height:1.4}
+    .script-prompt-use{background:var(--accent);color:#0d0d0f;border:none;border-radius:var(--radius-sm);padding:6px 12px;font-size:.78rem;font-weight:500;cursor:pointer;white-space:nowrap;font-family:'DM Sans',sans-serif}
+    /* Chat */
     .chat-area{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px;display:flex;flex-direction:column;gap:12px;scroll-behavior:smooth}
     .bubble-wrap{display:flex;flex-direction:column;gap:4px}
     .bubble-wrap.user{align-items:flex-end}.bubble-wrap.ai{align-items:flex-start}
@@ -103,6 +110,7 @@
     .dot-flashing span{width:6px;height:6px;border-radius:50%;background:var(--lindsay);animation:blink 1.2s infinite}
     .dot-flashing span:nth-child(2){animation-delay:.2s}.dot-flashing span:nth-child(3){animation-delay:.4s}
     @keyframes blink{0%,100%{opacity:.2}50%{opacity:1}}
+    /* Controls */
     .controls{flex-shrink:0;padding:12px 16px 20px;background:var(--surface);border-top:1px solid var(--border);display:flex;flex-direction:column;gap:10px}
     .mic-row{display:flex;align-items:center;gap:12px}
     .mic-btn{width:58px;height:58px;border-radius:50%;border:none;background:var(--accent);color:#0d0d0f;font-size:1.5rem;cursor:pointer;transition:all .2s;flex-shrink:0;display:flex;align-items:center;justify-content:center}
@@ -116,8 +124,7 @@
     .send-btn:disabled{opacity:.3;cursor:not-allowed}.send-btn:not(:disabled):hover{background:var(--accent2)}
     .clear-btn{background:var(--surface2);color:var(--text-dim);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;font-size:.9rem;cursor:pointer;font-family:'DM Sans',sans-serif}
     .clear-btn:hover{border-color:var(--error);color:var(--error)}
-
-    /* ── History ── */
+    /* History */
     #history-screen .scroll-body{padding:20px 16px;display:flex;flex-direction:column;gap:12px}
     .history-title{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--accent)}
     .session-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;display:flex;flex-direction:column;gap:8px}
@@ -126,8 +133,7 @@
     .session-card .s-phrases{display:flex;flex-wrap:wrap;gap:6px}
     .phrase-tag{background:rgba(232,197,71,.1);border:1px solid rgba(232,197,71,.2);color:var(--accent);border-radius:20px;padding:3px 10px;font-size:.75rem}
     .empty-state{text-align:center;color:var(--text-dim);padding:40px 20px;font-size:.9rem}
-
-    /* ── Loading ── */
+    /* Loading */
     .loading-overlay{position:fixed;inset:0;background:rgba(13,13,15,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;z-index:100}
     .loading-overlay.hidden{display:none}
     .loading-spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
@@ -152,7 +158,7 @@
   </nav>
 </header>
 
-<!-- ── Setup ── -->
+<!-- Setup -->
 <div id="setup-screen" class="screen active">
   <div class="scroll-body">
     <div class="setup-card">
@@ -165,16 +171,14 @@
         </div>
       </div>
       <div class="mode-panel active" id="panel-youtube">
-        <div class="field">
-          <input type="url" id="yt-url" placeholder="https://www.youtube.com/watch?v=..."/>
-        </div>
-        <div class="hint-text">⚠️ 部分 AEE 影片字幕已關閉。若失敗，請改用「貼上逐字稿」模式。</div>
+        <div class="field"><input type="url" id="yt-url" placeholder="https://www.youtube.com/watch?v=..."/></div>
+        <div class="hint-text">⚠️ 部分 AEE 影片字幕已關閉。若失敗請改用「貼上逐字稿」。</div>
       </div>
       <div class="mode-panel" id="panel-paste">
         <div class="field">
-          <textarea id="paste-text" placeholder="從 Podcast App 複製逐字稿貼在這裡&#10;&#10;步驟：開啟 Apple Podcasts 或其他 Podcast App → 找到 All Ears English → 選集數 → 點選「逐字稿」→ 全選複製 → 貼上"></textarea>
+          <textarea id="paste-text" placeholder="從 Podcast App 複製逐字稿貼在這裡&#10;&#10;步驟：Apple Podcasts / Spotify → All Ears English → 選集數 → 逐字稿 → 全選複製 → 貼上"></textarea>
         </div>
-        <div class="hint-text">💡 Apple Podcasts、Spotify、Overcast 等 App 大多有逐字稿功能，直接在 App 內複製即可。</div>
+        <div class="hint-text">💡 Apple Podcasts、Spotify、Overcast 等 App 都有逐字稿功能。</div>
       </div>
       <div class="field">
         <label>你要扮演的角色</label>
@@ -189,7 +193,7 @@
   </div>
 </div>
 
-<!-- ── Preview ── -->
+<!-- Preview -->
 <div id="preview-screen" class="screen">
   <div class="step-bar">
     <div class="step done"><div class="step-num">✓</div><span>載入</span></div>
@@ -203,7 +207,7 @@
   </div>
 </div>
 
-<!-- ── Practice ── -->
+<!-- Practice -->
 <div id="practice-screen" class="screen">
   <div class="step-bar">
     <div class="step done"><div class="step-num">✓</div><span>載入</span></div>
@@ -214,12 +218,29 @@
   </div>
   <div class="practice-header">
     <span class="episode-title" id="episode-title">練習中...</span>
-    <button class="hint-toggle" onclick="toggleHints()">💡 提示</button>
+    <button class="icon-btn" onclick="toggleScript()">📄 對照稿</button>
+    <button class="icon-btn" onclick="toggleHints()">💡 提示</button>
   </div>
+
+  <!-- 對照稿抽屜 -->
+  <div class="script-drawer" id="script-drawer">
+    <div class="script-drawer-title">📄 本集對話稿</div>
+    <div id="script-lines"></div>
+  </div>
+
+  <!-- 提示詞抽屜 -->
   <div class="hint-drawer" id="hint-drawer">
     <div class="hint-drawer-title">點擊填入提示詞</div>
     <div class="hint-chips" id="hint-chips"></div>
   </div>
+
+  <!-- 照稿提示列 -->
+  <div class="script-prompt hidden" id="script-prompt">
+    <div class="script-prompt-label">📖 你的台詞</div>
+    <div class="script-prompt-text" id="script-prompt-text"></div>
+    <button class="script-prompt-use" onclick="useScriptLine()">照著說</button>
+  </div>
+
   <div class="chat-area" id="chat-area"></div>
   <div class="controls">
     <div class="mic-row">
@@ -234,7 +255,7 @@
   </div>
 </div>
 
-<!-- ── History ── -->
+<!-- History -->
 <div id="history-screen" class="screen">
   <div class="scroll-body">
     <div class="history-title">練習紀錄</div>
@@ -242,10 +263,14 @@
   </div>
 </div>
 
-</div><!-- #app -->
+</div>
 
 <script>
-let userRole='',aiRole='',transcript='',targetPhrases=[],hintCards=[],conversationHistory=[],currentSessionId=null,recognition=null,isRecording=false,isAiSpeaking=false,userStoppedMic=false,pendingText='',previewData=null,currentMode='youtube';
+let userRole='',aiRole='',transcript='',targetPhrases=[],hintCards=[],dialogue=[],
+    conversationHistory=[],currentSessionId=null,recognition=null,
+    isRecording=false,isAiSpeaking=false,userStoppedMic=false,
+    pendingText='',previewData=null,currentMode='youtube',
+    dialogueIndex=0; // 追蹤目前對話到哪一行
 
 function navTo(name){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
@@ -296,8 +321,7 @@ async function loadEpisode(){
       updateLoading('🧠 AI 分析本集重點...');
       await analyzeAndShow();
     }catch(err){
-      hideLoading();
-      setStatus('❌ '+err.message+'（請改用「貼上逐字稿」模式）','error');
+      hideLoading();setStatus('❌ '+err.message+'（請改用「貼上逐字稿」模式）','error');
       document.getElementById('start-btn').disabled=false;
     }
   }
@@ -311,12 +335,10 @@ async function analyzeAndShow(){
     previewData=d;
     targetPhrases=(d.vocabulary||[]).map(v=>v.phrase);
     hintCards=d.hint_cards||[];
-    hideLoading();
-    renderPreview(d);
-    navTo('preview');
+    dialogue=d.dialogue||[];
+    hideLoading();renderPreview(d);navTo('preview');
   }catch(err){
-    hideLoading();
-    setStatus('❌ AI 分析失敗：'+err.message,'error');
+    hideLoading();setStatus('❌ AI 分析失敗：'+err.message,'error');
     document.getElementById('start-btn').disabled=false;
   }
 }
@@ -325,7 +347,7 @@ function renderPreview(data){
   const vocabHtml=(data.vocabulary||[]).map(v=>`<div class="vocab-card"><div class="vocab-phrase">${escHtml(v.phrase)}</div><div class="vocab-meaning">${escHtml(v.meaning)}</div><div class="vocab-example">${escHtml(v.example)}</div></div>`).join('');
   const warmupHtml=(data.warmup_prompts||[]).map(p=>`<div class="warmup-item" onclick="useWarmup(this.dataset.text)" data-text="${escAttr(p)}">${escHtml(p)}</div>`).join('');
   document.getElementById('preview-content').innerHTML=`
-    <div style="display:flex;flex-direction:column;gap:16px;padding-bottom:8px">
+    <div style="display:flex;flex-direction:column;gap:16px;padding:20px 16px 8px">
       <div class="preview-summary"><h3>📻 本集摘要</h3><p>${escHtml(data.summary||'')}</p></div>
       <div class="section-title">🎯 本集目標詞彙（共 ${(data.vocabulary||[]).length} 個）</div>
       <div class="vocab-grid">${vocabHtml}</div>
@@ -341,15 +363,56 @@ function renderPreview(data){
 function useWarmup(text){startPractice();setTimeout(()=>{pendingText=text;document.getElementById('transcript-preview').textContent=text;document.getElementById('send-btn').disabled=false;},300);}
 
 function startPractice(){
-  currentSessionId=Date.now().toString();conversationHistory=[];
+  currentSessionId=Date.now().toString();conversationHistory=[];dialogueIndex=0;
   document.getElementById('chat-area').innerHTML='';
   document.getElementById('episode-title').textContent='你：'+userRole+' ／ AI：'+aiRole;
+  // 建立提示詞chips
   document.getElementById('hint-chips').innerHTML=hintCards.map(h=>`<div class="hint-chip" onclick="useHint('${escAttr(h)}')">${escHtml(h)}</div>`).join('');
+  // 建立對照稿
+  renderScriptLines();
   navTo('practice');
   addBubble('ai','Hey! I\'m so excited to practice with you today! I\'m '+aiRole+', and you\'re playing '+userRole+'. Ready to dive in? 🎧');
+  // 顯示第一句我的台詞
+  showNextMyLine();
   setupSpeechRecognition();
 }
 
+function renderScriptLines(){
+  const el=document.getElementById('script-lines');
+  el.innerHTML=dialogue.map((line,i)=>{
+    const isMe=line.speaker===userRole;
+    const cls=line.speaker.toLowerCase();
+    return `<div class="script-line" id="sline-${i}">
+      <div class="script-speaker ${cls}">${escHtml(line.speaker)}</div>
+      <div class="script-text${isMe?' my-turn':''}">${escHtml(line.text)}</div>
+    </div>`;
+  }).join('');
+}
+
+function showNextMyLine(){
+  // 找到下一句是「我的角色」說的台詞
+  let found=false;
+  for(let i=dialogueIndex;i<dialogue.length;i++){
+    if(dialogue[i].speaker===userRole){
+      document.getElementById('script-prompt-text').textContent=dialogue[i].text;
+      document.getElementById('script-prompt').classList.remove('hidden');
+      dialogueIndex=i;
+      found=true;
+      break;
+    }
+  }
+  if(!found) document.getElementById('script-prompt').classList.add('hidden');
+}
+
+function useScriptLine(){
+  const text=document.getElementById('script-prompt-text').textContent;
+  pendingText=text;
+  document.getElementById('transcript-preview').textContent=text;
+  document.getElementById('send-btn').disabled=false;
+  document.getElementById('script-prompt').classList.add('hidden');
+}
+
+function toggleScript(){document.getElementById('script-drawer').classList.toggle('open');}
 function toggleHints(){document.getElementById('hint-drawer').classList.toggle('open');}
 function useHint(text){pendingText=(pendingText+' '+text).trim();document.getElementById('transcript-preview').textContent=pendingText;document.getElementById('send-btn').disabled=false;document.getElementById('hint-drawer').classList.remove('open');}
 
@@ -362,42 +425,38 @@ function setupSpeechRecognition(){
   const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
   if(!SR){document.getElementById('mic-status').textContent='⚠️ 請用 Chrome 使用語音輸入';document.getElementById('mic-btn').disabled=true;return;}
   recognition=new SR();recognition.lang='en-US';recognition.continuous=false;recognition.interimResults=true;
-  recognition.onstart=()=>{isRecording=true;document.getElementById('mic-btn').classList.add('recording');document.getElementById('mic-btn').textContent='⏹';document.getElementById('mic-status').textContent='🔴 聆聽中...';document.getElementById('mic-status').className='mic-status listening';};
+  recognition.onstart=()=>{isRecording=true;document.getElementById('mic-btn').classList.add('recording');document.getElementById('mic-btn').textContent='⏹';document.getElementById('mic-status').textContent='🔴 聆聽中...（說完後按⏹）';document.getElementById('mic-status').className='mic-status listening';};
   recognition.onresult=(e)=>{
-  let interim='';
-  // 只取這次事件新增的 final 結果
-  for(let i=e.resultIndex;i<e.results.length;i++){
-    if(e.results[i].isFinal){pendingText=(pendingText+' '+e.results[i][0].transcript).trim();}
-    else{interim+=e.results[i][0].transcript;}
-  }
-  document.getElementById('transcript-preview').textContent=pendingText+(interim?' '+interim:'')||'說話中...';
-  document.getElementById('send-btn').disabled=!pendingText;
-};
+    let interim='';
+    for(let i=e.resultIndex;i<e.results.length;i++){
+      if(e.results[i].isFinal)pendingText=(pendingText+' '+e.results[i][0].transcript).trim();
+      else interim+=e.results[i][0].transcript;
+    }
+    document.getElementById('transcript-preview').textContent=pendingText+(interim?' '+interim:'')||'說話中...';
+    document.getElementById('send-btn').disabled=!pendingText;
+  };
   recognition.onend=()=>{
-  isRecording=false;
-  document.getElementById('mic-btn').classList.remove('recording');
-  document.getElementById('mic-btn').textContent='🎤';
-  // 如果不是 AI 說話中、也不是使用者主動停止，自動重啟繼續聆聽
-  if(!isAiSpeaking && !userStoppedMic){
-    try{recognition.start();}catch(e){}
-  } else {
-    document.getElementById('mic-status').textContent=pendingText?'✅ 確認後按「傳送」':'按下麥克風開始說話';
-    document.getElementById('mic-status').className='mic-status';
-  }
-};
-  recognition.onerror=(e)=>{isRecording=false;document.getElementById('mic-btn').classList.remove('recording');document.getElementById('mic-btn').textContent='🎤';document.getElementById('mic-status').textContent='❌ '+e.error;};
+    isRecording=false;
+    document.getElementById('mic-btn').classList.remove('recording');
+    document.getElementById('mic-btn').textContent='🎤';
+    if(!isAiSpeaking&&!userStoppedMic){
+      try{recognition.start();}catch(e){}
+    } else {
+      document.getElementById('mic-status').textContent=pendingText?'✅ 確認後按「傳送」':'按下麥克風開始說話';
+      document.getElementById('mic-status').className='mic-status';
+    }
+  };
+  recognition.onerror=(e)=>{isRecording=false;document.getElementById('mic-btn').classList.remove('recording');document.getElementById('mic-btn').textContent='🎤';if(e.error!=='no-speech'){document.getElementById('mic-status').textContent='❌ '+e.error;}};
 }
 
 function toggleMic(){
   if(!recognition)return;
   if(isRecording){
-    userStoppedMic=true;
-    recognition.stop();
+    userStoppedMic=true;recognition.stop();
     document.getElementById('mic-status').textContent=pendingText?'✅ 確認後按「傳送」':'按下麥克風開始說話';
     document.getElementById('mic-status').className='mic-status';
   } else {
-    userStoppedMic=false;
-    pendingText='';
+    userStoppedMic=false;pendingText='';
     document.getElementById('transcript-preview').textContent='說話中...';
     document.getElementById('send-btn').disabled=true;
     recognition.start();
@@ -409,13 +468,21 @@ async function sendMessage(){
   const text=pendingText.trim();if(!text||isAiSpeaking)return;
   clearTranscript();document.getElementById('send-btn').disabled=true;document.getElementById('mic-btn').disabled=true;
   addBubble('user',text);conversationHistory.push({role:'user',content:text});
+  // 推進 dialogueIndex 到下一句
+  dialogueIndex++;
   const indicator=addTypingIndicator();
   try{
     const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({userMessage:text,transcript,history:conversationHistory.slice(-10),targetPhrases})});
     const data=await res.json();if(!res.ok||data.error)throw new Error(data.error);
-    indicator.remove();addBubble('ai',data.dialoguePart);if(data.feedbackPart)addFeedback(data.feedbackPart);
-    conversationHistory.push({role:'assistant',content:data.reply});saveSession();
+    indicator.remove();
+    addBubble('ai',data.dialoguePart);
+    if(data.feedbackPart)addFeedback(data.feedbackPart);
+    conversationHistory.push({role:'assistant',content:data.reply});
+    saveSession();
+    // AI 說完後推進 index 並顯示下一句我的台詞
+    dialogueIndex++;
     await speak(data.dialoguePart);
+    showNextMyLine();
   }catch(err){indicator.remove();addBubble('ai','⚠️ 連線錯誤（'+err.message+'）');}
   document.getElementById('mic-btn').disabled=false;document.getElementById('send-btn').disabled=false;
 }
@@ -427,12 +494,19 @@ function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').
 function escAttr(s){return String(s).replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 
 function speak(text){return new Promise(resolve=>{if(!window.speechSynthesis)return resolve();
-  // 停止錄音，禁用麥克風
   if(isRecording&&recognition){recognition.stop();}
   document.getElementById('mic-btn').disabled=true;
   document.getElementById('mic-btn').textContent='🎤';
   document.getElementById('mic-btn').classList.remove('recording');
-  window.speechSynthesis.cancel();isAiSpeaking=true;document.getElementById('mic-status').textContent='🔊 '+aiRole+' 說話中...';const utt=new SpeechSynthesisUtterance(text);utt.lang='en-US';utt.rate=0.92;utt.pitch=1.05;const v=window.speechSynthesis.getVoices();const f=v.find(x=>x.lang.startsWith('en')&&/female|samantha|karen|victoria|moira/i.test(x.name));if(f)utt.voice=f;utt.onend=utt.onerror=()=>{isAiSpeaking=false;userStoppedMic=false;document.getElementById('mic-btn').disabled=false;document.getElementById('mic-status').textContent='按下麥克風開始說話';resolve();};window.speechSynthesis.speak(utt);});}
+  window.speechSynthesis.cancel();isAiSpeaking=true;
+  document.getElementById('mic-status').textContent='🔊 '+aiRole+' 說話中...';
+  const utt=new SpeechSynthesisUtterance(text);utt.lang='en-US';utt.rate=0.92;utt.pitch=1.05;
+  const v=window.speechSynthesis.getVoices();
+  const f=v.find(x=>x.lang.startsWith('en')&&/female|samantha|karen|victoria|moira/i.test(x.name));
+  if(f)utt.voice=f;
+  utt.onend=utt.onerror=()=>{isAiSpeaking=false;userStoppedMic=false;document.getElementById('mic-btn').disabled=false;document.getElementById('mic-status').textContent='按下麥克風開始說話';resolve();};
+  window.speechSynthesis.speak(utt);
+});}
 
 function saveSession(){const sessions=JSON.parse(localStorage.getItem('aee_sessions')||'[]');const ex=sessions.find(s=>s.id===currentSessionId);if(ex){ex.turns++;ex.lastActive=Date.now();}else{sessions.unshift({id:currentSessionId,date:new Date().toLocaleDateString('zh-TW'),role:userRole,phrases:targetPhrases.slice(0,5),turns:1,lastActive:Date.now(),summary:(previewData?.summary||'').slice(0,80)});}localStorage.setItem('aee_sessions',JSON.stringify(sessions.slice(0,50)));}
 
