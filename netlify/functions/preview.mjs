@@ -21,14 +21,14 @@ Analyze this transcript and return ONLY a raw JSON object (no markdown, no backt
   "warmup_prompts": ["Opening line 1", "Opening line 2", "Opening line 3"],
   "hint_cards": ["Useful phrase 1", "Useful phrase 2", "Useful phrase 3", "Useful phrase 4", "Useful phrase 5"],
   "dialogue": [
-    { "speaker": "Lindsay", "text": "What they said" },
-    { "speaker": "Aubrey", "text": "What they said" }
+    { "speaker": "Lindsay", "text": "Original English text only" },
+    { "speaker": "Aubrey", "text": "Original English text only" }
   ]
 }
 
 Rules:
 - vocabulary: 6 most useful phrases from the transcript
-- dialogue: parse the transcript into alternating speaker turns. The two speakers are Lindsay and Aubrey. If you cannot identify speakers clearly, alternate them starting with Lindsay. Keep each turn concise (max 3 sentences). Include 8-12 turns total.
+- dialogue: parse the transcript into alternating speaker turns. The two speakers are Lindsay and Aubrey. If you cannot identify speakers clearly, alternate them starting with Lindsay. Keep each turn concise (max 3 sentences). Include 8-12 turns total. IMPORTANT: dialogue text must be the ORIGINAL ENGLISH from the transcript. Never translate dialogue into Chinese.
 - All Chinese must be Traditional Chinese
 
 Transcript:
