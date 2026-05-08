@@ -28,7 +28,7 @@ Analyze this transcript and return ONLY a raw JSON object (no markdown, no backt
 
 Rules:
 - vocabulary: 6 most useful phrases from the transcript
-- dialogue: parse the transcript into alternating speaker turns. The two speakers are Lindsay and Aubrey. If you cannot identify speakers clearly, alternate them starting with Lindsay. Keep each turn concise (max 3 sentences). Include 8-12 turns total. IMPORTANT: dialogue text must be the ORIGINAL ENGLISH from the transcript. Never translate dialogue into Chinese.
+- dialogue: parse the transcript into alternating speaker turns for the ROLEPLAY section only (after "let's start the roleplay" or similar). The two speakers are Lindsay and Aubrey. Skip any podcast promotion sentences (follow buttons, subscriptions, website plugs). Keep each turn concise (max 3 sentences). Include 8-12 turns total. IMPORTANT: dialogue text must be the ORIGINAL ENGLISH from the transcript. Never translate dialogue into Chinese.
 - All Chinese must be Traditional Chinese
 
 Transcript:
